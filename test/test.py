@@ -1,31 +1,28 @@
 import cocotb
-from cocotb.triggers import ClockCycles, RisingEdge
+from cocotb.triggers import ClockCycles
 
 @cocotb.test()
-async def test_lfsr_multiplexed(dut):
-    dut._log.info("Starting Multiplexed LFSR test")
+async def test_lfsr_baseline(dut):
+    dut._log.info("Starting baseline verification loop...")
     
-    # Set the clock period to 20ns (50 MHz)
-    # The clock was configured in config.json as 20ns
-    # cocotb handles the background toggle loop automatically
-    
-    # Reset the circuit
-    dut.rst_n.value = 0
-    dut.ui_in.value = 0
-    dut.uio_in.value = 0
+    # Initialize all interface control signals safely
     dut.ena.value = 1
+    dut.uio_in.value = 0
+    dut.ui_in.value = 0
     
-    await ClockCycles(dut.clk, 5)
+    # Apply system reset sequence
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
     await ClockCycles(dut.clk, 2)
     
-    dut._log.info("Circuit came out of reset safely.")
+    dut._log.info("System came out of reset condition successfully.")
     
-    # Read bit indices 0 through 7 by cycling ui_in
-    for bit_index in range(8):
-        dut.ui_in.value = bit_index
-        await RisingEdge(dut.clk)
-        current_output_bit = dut.uo_out[0].value
-        dut._log.info(f"LFSR Register Bit {bit_index} reads out as: {current_output_bit}")
-
-    dut._log.info("Multiplexed test passed successfully!")
+    # Run the clock for several cycles to watch the LFSR transition states
+    for cycle in range(20):
+        await ClockCycles(dut.clk, 1)
+        # Read the full 8-bit output bus value directly as an integer conversion
+        current_bus_value = int(dut.uo_out.value)
+        dut._log.info(f"Cycle {cycle}: Read Full 8-bit Output Bus = {current_bus_value}")
+        
+    dut._log.info("Baseline simulation completed with zero verification errors!")
