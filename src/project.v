@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2026 Satya Roop Bankuru
  * SPDX-License-Identifier: Apache-2.0
+ * Fresh Trigger: Forced pipeline rebuild sequence.
  */
 
 `default_nettype none
@@ -16,7 +17,7 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    // 8-bit internal shift register
+    // 8-bit internal shift register logic
     reg [7:0] shift_reg;
     wire feedback = shift_reg[7] ^ shift_reg[5] ^ shift_reg[4] ^ shift_reg[3];
 
@@ -28,16 +29,16 @@ module tt_um_example (
         end
     end
 
-    // CRITICAL CONGESTION FIX: Drive only 1 external output pin (uo_out[0]).
-    // Hardwire the other 7 outputs to 0 so OpenLane completely removes their physical routing lines.
+    // LOW LAYER ROUTING: Drive only 1 external output pin (uo_out[0]).
+    // Pins 1 through 7 are tied to 0 to prevent Metal 5 routing overhead.
     assign uo_out[0]   = shift_reg[0];
     assign uo_out[7:1] = 7'b0000000;
 
-    // Turn off bidirectional pins entirely
+    // Turn off bidirectional infrastructure pins
     assign uio_out = 8'b00000000;
     assign uio_oe  = 8'b00000000;
 
-    // Quiet the linting tools safely
+    // Clear compiler linter warnings cleanly
     wire [7:0] unused_inputs = ui_in ^ uio_in;
     wire _unused = &{ena, unused_inputs, 1'b0};
 
