@@ -31,17 +31,21 @@ module tt_um_example (
         end
     end
 
-    // Assign output directly
-    assign uo_out = shift_reg;
+    // CRITICAL FIX: Multiplex all 8 bits of the LFSR onto a single output port (uo_out[0])
+    // This removes the physical wiring congestion that forces the router to climb to Metal 5.
+    // Use the lowest 3 bits of ui_in to select which register bit to read out.
+    wire selected_bit = shift_reg[ui_in[2:0]];
+    
+    // Drive only a single output line; tie everything else hard to absolute ground
+    assign uo_out[0] = selected_bit;
+    assign uo_out[7:1] = 7'b0000000;
 
-    // Disconnect bi-directional pins entirely from internal logic routing
+    // Completely deactivate the bi-directional I/O infrastructure routing
     assign uio_out = 8'b00000000;
     assign uio_oe  = 8'b00000000;
 
-    // Forcible Tie-offs: Tieing external input ports directly to an internal sink
-    // This tells the router that these pins don't connect to any internal gates, 
-    // letting OpenLane ignore routing them entirely!
-    wire [7:0] dummy_inputs = ui_in ^ uio_in;
-    wire _unused = &{ena, dummy_inputs, 1'b0};
+    // Sink all remaining inputs to absolute zero to prevent floating ports
+    wire [7:0] combined_inputs = ui_in ^ uio_in;
+    wire _unused = &{ena, combined_inputs, 1'b0};
 
 endmodule
