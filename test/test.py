@@ -27,7 +27,7 @@ async def test_project(dut):
     for cycle in range(15):
         await RisingEdge(dut.clk)
         current_value = int(dut.uo_out.value)
-        dut._log.info(f"Clock Cycle {cycle:02d} -> Random Byte Output: 0x{current_value:02x} ({current_value:03d})")
+        dut._log.info(f"Clock Cycle {cycle:02d} -> Random Byte Output: 0x{current_value:02x}")
         
         # Verify safety rules
         assert current_value != 0, f"Critical Failure: LFSR collapsed to 0x00 on cycle {cycle}!"
