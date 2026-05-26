@@ -1,19 +1,16 @@
-# Tiny Tapeout project information
 project:
-  title:        "8-bit Pseudo-Random LFSR Generator"
-  description:  "A digital sequential circuit implementing an 8-bit maximal-period LFSR PRNG."
-  author:       "Satya Roop Bankuru & Team"
+  title:        "8-bit LFSR Circuit"
+  description:  "Sequential PRNG block using Verilog."
+  author:       "Satya Roop Bankuru"
   language:     "Verilog"
-  clock_hz:     50000000       # 50 MHz default clock frequency
-  tiles:        "1x1"          # Fits perfectly in 1 tile
+  clock_hz:     50000000
+  tiles:        "1x1"
   top_module:   "tt_um_example"
   source_files:
     - "src/project.v"
 
-# Tiny Tapeout specification standard configuration version
 yaml_version: 6
 
-# Pinout configuration mapping directly to indexed keys as expected by version 6
 pinout:
   ui[0]: "unused"
   ui[1]: "unused"
@@ -24,14 +21,14 @@ pinout:
   ui[6]: "unused"
   ui[7]: "unused"
 
-  uo[0]: "random out bit 0"
-  uo[1]: "random out bit 1"
-  uo[2]: "random out bit 2"
-  uo[3]: "random out bit 3"
-  uo[4]: "random out bit 4"
-  uo[5]: "random out bit 5"
-  uo[6]: "random out bit 6"
-  uo[7]: "random out bit 7"
+  uo[0]: "out0"
+  uo[1]: "out1"
+  uo[2]: "out2"
+  uo[3]: "out3"
+  uo[4]: "out4"
+  uo[5]: "out5"
+  uo[6]: "out6"
+  uo[7]: "out7"
 
   uio[0]: "unused"
   uio[1]: "unused"
