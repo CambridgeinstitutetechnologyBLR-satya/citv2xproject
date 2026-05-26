@@ -1,20 +1,12 @@
-<!---
+# 8-Bit LFSR Pseudo-Random Circuit
 
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
+Designed for digital VLSI training module parameters.
 
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
+## Core Topology
+This design generates pseudo-random sequences using an active feedback polynomial shift mechanism:
+$$x^8 + x^6 + x^5 + x^4 + 1$$
 
-## How it works
-
-Explain how your project works
-
-## How to test
-
-Explain how to use your project
-
-## External hardware
-
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+## Validation Guide
+1. Hold `rst_n` low to inject the `0x01` processing seed.
+2. Assert `rst_n` high to begin random cycling.
+3. Observe the generated unique sequences change across the 8-bit `uo_out` pins on each clock cycle edge.
