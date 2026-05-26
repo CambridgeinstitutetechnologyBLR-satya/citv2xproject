@@ -17,11 +17,6 @@ jobs:
         uses: TinyTapeout/tt-gds-action@ttgf26a
         with:
           pdk: gf180mcuD
-        # Explicitly forcing the GF180 OpenLane router to halt at Metal 4
-        env:
-          RT_MAX_LAYER: Metal4
-          GRT_MAX_LAYER: Metal4
-          DRT_MAX_LAYER: Metal4
 
   precheck:
     needs: gds
