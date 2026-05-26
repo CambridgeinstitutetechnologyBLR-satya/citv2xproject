@@ -6,8 +6,7 @@
   "CLOCK_PERIOD": 20,
   "CLOCK_PORT": "clk",
   "CLOCK_NETS": "clk",
-  "PL_TARGET_DENSITY_PCT": 15,
+  "PL_TARGET_DENSITY_PCT": 5,
   "FP_SIZING": "absolute",
-  "SYNTH_AREA_REG_COST": 100,
   "SYNTH_STRATEGY": "AREA 0"
 }
