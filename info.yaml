@@ -5,44 +5,39 @@ project:
   author:       "Satya Roop Bankuru & Team"
   language:     "Verilog"
   clock_hz:     50000000       # 50 MHz default clock frequency
-
-# How many silicon blocks (tiles) your design takes up. A simple 8-bit LFSR fits perfectly in 1 tile.
-  tiles:        "1x1"          
-
-# Your top module name and the list of source files mapped relative to the root or folder dir
+  tiles:        "1x1"          # Fits perfectly in 1 tile
   top_module:   "tt_um_example"
   source_files:
     - "src/project.v"
 
 # Tiny Tapeout specification standard configuration version
-yaml_version: "4"
+yaml_version: 6
 
-# Documenting the explicit pinout configurations exactly as demanded by the toolchain validator
+# Pinout configuration mapping directly to indexed keys as expected by version 6
 pinout:
-  inputs:
-    - "none"
-    - "none"
-    - "none"
-    - "none"
-    - "none"
-    - "none"
-    - "none"
-    - "none"
-  outputs:
-    - "random out 0"
-    - "random out 1"
-    - "random out 2"
-    - "random out 3"
-    - "random out 4"
-    - "random out 5"
-    - "random out 6"
-    - "random out 7"
-  bidirectional:
-    - "unused"
-    - "unused"
-    - "unused"
-    - "unused"
-    - "unused"
-    - "unused"
-    - "unused"
-    - "unused"
+  ui[0]: "unused"
+  ui[1]: "unused"
+  ui[2]: "unused"
+  ui[3]: "unused"
+  ui[4]: "unused"
+  ui[5]: "unused"
+  ui[6]: "unused"
+  ui[7]: "unused"
+
+  uo[0]: "random out bit 0"
+  uo[1]: "random out bit 1"
+  uo[2]: "random out bit 2"
+  uo[3]: "random out bit 3"
+  uo[4]: "random out bit 4"
+  uo[5]: "random out bit 5"
+  uo[6]: "random out bit 6"
+  uo[7]: "random out bit 7"
+
+  uio[0]: "unused"
+  uio[1]: "unused"
+  uio[2]: "unused"
+  uio[3]: "unused"
+  uio[4]: "unused"
+  uio[5]: "unused"
+  uio[6]: "unused"
+  uio[7]: "unused"
