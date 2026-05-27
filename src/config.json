@@ -19,5 +19,4 @@
   "GRT_ALLOW_CONGESTION": 0,
   "DIODE_INSERTION_STRATEGY": 0,
 
-  "FP_PIN_ORDER_CFG": "dir::pin_order.cfg"
 }
