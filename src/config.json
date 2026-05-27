@@ -15,7 +15,5 @@
   "RT_MIN_LAYER": "Metal2",
   "RT_MAX_LAYER": "Metal4",
 
-  "FP_PDN_CFG": "dir::pdn.tcl",
-
   "GRT_ALLOW_CONGESTION": 0
 }
