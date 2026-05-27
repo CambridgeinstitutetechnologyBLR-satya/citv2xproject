@@ -15,5 +15,7 @@
   "RT_MIN_LAYER": "Metal2",
   "RT_MAX_LAYER": "Metal4",
 
+  "FP_DEF_TEMPLATE": "dir::../tt/tech/gf180mcuD/def/tt_block_1x1.def",
+
   "GRT_ALLOW_CONGESTION": 0
 }
